@@ -56,14 +56,14 @@ int main(int argc, char **argv)
             gid = pw->pw_gid;
         }
     }
-
+#if 0
     /* Until we have something better, only root and the shell can use su. */
     myuid = getuid();
     if (myuid != AID_ROOT && myuid != AID_SHELL) {
         fprintf(stderr,"su: uid %d not allowed to su\n", myuid);
         return 1;
     }
-    
+#endif
     if(setgid(gid) || setuid(uid)) {
         fprintf(stderr,"su: permission denied\n");
         return 1;
