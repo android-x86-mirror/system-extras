@@ -80,6 +80,15 @@ LOCAL_SHARED_LIBRARIES := \
     libsparse \
     libz
 LOCAL_CFLAGS := -DREAL_UUID
+
+ifeq ($(BOARD_SUPPRESS_EMMC_WIPE),true)
+    LOCAL_CFLAGS += -DSUPPRESS_EMMC_WIPE
+endif
+
+ifeq ($(BOARD_NO_SECURE_DISCARD),true)
+    LOCAL_CFLAGS += -DNO_SECURE_DISCARD
+endif
+
 include $(BUILD_SHARED_LIBRARY)
 
 
@@ -95,6 +104,15 @@ LOCAL_STATIC_LIBRARIES := \
     libsparse_static \
     libselinux \
     libbase
+
+ifeq ($(BOARD_SUPPRESS_EMMC_WIPE),true)
+    LOCAL_CFLAGS += -DSUPPRESS_EMMC_WIPE
+endif
+
+ifeq ($(BOARD_NO_SECURE_DISCARD),true)
+    LOCAL_CFLAGS += -DNO_SECURE_DISCARD
+endif
+
 include $(BUILD_STATIC_LIBRARY)
 
 
