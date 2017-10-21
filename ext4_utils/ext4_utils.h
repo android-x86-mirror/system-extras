@@ -57,8 +57,10 @@ extern int force;
 
 #define EXT4_JNL_BACKUP_BLOCKS 1
 
+#ifndef __cplusplus
 #ifndef min /* already defined by windows.h */
 #define min(a, b) ((a) < (b) ? (a) : (b))
+#endif
 #endif
 
 #define DIV_ROUND_UP(x, y) (((x) + (y) - 1)/(y))
@@ -99,8 +101,6 @@ struct ext2_group_desc {
 
 struct fs_aux_info {
 	struct ext4_super_block *sb;
-	struct ext4_super_block *sb_block;
-	struct ext4_super_block *sb_zero;
 	struct ext4_super_block **backup_sb;
 	struct ext2_group_desc *bg_desc;
 	struct block_group_info *bgs;
@@ -145,7 +145,7 @@ void ext4_fill_in_sb(int real_uuid);
 void ext4_create_resize_inode(void);
 void ext4_create_journal_inode(void);
 void ext4_update_free(void);
-void ext4_queue_sb(u64 start_block, struct ext4_super_block *sb);
+void ext4_queue_sb(void);
 u64 get_block_device_size(int fd);
 int is_block_device_fd(int fd);
 u64 get_file_size(int fd);
