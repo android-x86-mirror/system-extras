@@ -160,6 +160,9 @@ fi
 if [ -z $SIZE ]; then
   echo "Need size of filesystem"
   exit 2
+elif [ 0 -eq 0$SIZE ]; then
+  s=$(du -sm $SRC_DIR | cut -f1)
+  SIZE=$(($s / 10 + $s))M
 fi
 
 # Round down the filesystem length to be a multiple of the block size
